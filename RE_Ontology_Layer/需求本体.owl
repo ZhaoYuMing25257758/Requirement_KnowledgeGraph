@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#"
+     xml:base="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#上下文关系 -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#上下文关系">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务边界"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务对象"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务状态"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务用例"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#关联关系 -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#关联关系">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务对象"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务角色"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务用例"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务边界"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#包含关系 -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#包含关系">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务建模"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务目标"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务角色"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务边界"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#推导关系 -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#推导关系">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务对象"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务边界"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#推导关系"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务对象"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#推导关系"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务边界"/>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务对象 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务对象">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务建模"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务建模 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务建模"/>
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务状态 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务状态">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务建模"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务用例 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务用例">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务建模"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务目标 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务目标">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务建模"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务角色 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务角色">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务建模"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务边界 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务边界">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/administrator/ontologies/2019/8/untitled-ontology-21#业务建模"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.7.2018-12-02T02:23:35Z) https://github.com/owlcs/owlapi -->
+

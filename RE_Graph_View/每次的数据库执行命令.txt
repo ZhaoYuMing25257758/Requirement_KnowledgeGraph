@@ -1,0 +1,106 @@
+// 将ProjectName.csv 导入（项目名称）
+LOAD CSV WITH HEADERS  FROM "file:///ProjectName.csv" AS line  
+CREATE (g:RE_Project{Name:line.Name,Summary:line.Summary})
+//查询相关信息
+match(x:RE_Entity) return x.Summary
+
+//将Stake_holder.csv导入（涉众）
+LOAD CSV WITH HEADERS  FROM "file:///Stake_holder.csv" AS line  
+CREATE (g:RE_Stake{Name:line.Name,Duty:line.Duty,Expectation:line.Expectation})
+
+//将Business_usecase.csv导入（用例）
+LOAD CSV WITH HEADERS  FROM "file:///Business_usecase.csv" AS line  
+CREATE (g:RE_usecase{Name:line.Name})
+
+//将Business_state.csv导入（业务状态）
+LOAD CSV WITH HEADERS  FROM "file:///Business_state.csv" AS line  
+CREATE (g:RE_state{Name:line.Name})
+
+//将Business_object.csv导入（业务状态）
+LOAD CSV WITH HEADERS  FROM "file:///Business_object.csv" AS line  
+CREATE (g:RE_object{Name:line.Name})
+
+
+//将Business_goal.csv导入（业务目标）
+LOAD CSV WITH HEADERS  FROM "file:///Business_goal.csv" AS line  
+CREATE (g:RE_goal{Name:line.Name,Content:line.Content})
+
+
+//将Business_boundary.csv导入（业务边界）
+LOAD CSV WITH HEADERS  FROM "file:///Business_boundary.csv" AS line  
+CREATE (g:RE_boundary{Name:line.Name,Describe:line.Describe})
+
+//将新节点导入RE_New_Node.csv
+LOAD CSV WITH HEADERS  FROM "file:///RE_New_Node.csv" AS line  
+CREATE (g:RE_newNode{Title:line.title,Label:line.label})
+
+//以下是关系的导入
+//将projectName和stake_holder的关系导入
+LOAD CSV  WITH HEADERS FROM "file:///include_relation.csv" AS line
+MATCH (entity1:RE_Project{Name:line.Item1}) , (entity2:RE_Stake{Name:line.Item2})
+CREATE (entity1)-[:re_RELATION { type: line.relation }]->(entity2)
+
+//将projectName和Business_boundary的关系导入
+LOAD CSV  WITH HEADERS FROM "file:///include_relation.csv" AS line
+MATCH (entity1:RE_Project{Name:line.Item1}) , (entity2:RE_boundary{Name:line.Item2})
+CREATE (entity1)-[:re_RELATION { type: line.relation }]->(entity2)
+
+//将projectName和Business_goal的关系导入
+LOAD CSV  WITH HEADERS FROM "file:///include_relation.csv" AS line
+MATCH (entity1:RE_Project{Name:line.Item1}) , (entity2:RE_goal{Name:line.Item2})
+CREATE (entity1)-[:re_RELATION { type: line.relation }]->(entity2)
+
+//业务目标和子目标之间的关系
+LOAD CSV  WITH HEADERS FROM "file:///include_relation.csv" AS line
+MATCH (entity1:RE_goal{Name:line.Item1}) , (entity2:RE_goal{Name:line.Item2})
+CREATE (entity1)-[:re_RELATION { type: line.relation }]->(entity2)
+/*第一层的知识图谱完成，成功*/
+
+//推导关系的知识图谱
+//业务对象和边界之间的关系
+LOAD CSV  WITH HEADERS FROM "file:///Infer_relation.csv" AS line
+MATCH (entity1:RE_object{Name:line.Item1}) , (entity2:RE_boundary{Name:line.Item2})
+CREATE (entity1)-[:re1_RELATION { type: line.relation }]->(entity2)
+
+//关联关系的知识图谱
+//涉众和边界之间的关系
+LOAD CSV  WITH HEADERS FROM "file:///association_relation.csv" AS line
+MATCH (entity1:RE_boundary{Name:line.Item1}) , (entity2:RE_Stake{Name:line.Item2})
+CREATE (entity1)-[:re2_RELATION { type: line.relation }]->(entity2)
+
+
+//关联关系的知识图谱
+//涉众和用例之间的关系
+LOAD CSV  WITH HEADERS FROM "file:///association_relation.csv" AS line
+MATCH (entity1:RE_usecase{Name:line.Item1}) , (entity2:RE_Stake{Name:line.Item2})
+CREATE (entity1)-[:re2_RELATION { type: line.relation }]->(entity2)
+
+//上下文关系边界和状态
+LOAD CSV  WITH HEADERS FROM "file:///content_relation.csv" AS line
+MATCH (entity1:RE_boundary{Name:line.Item1}) , (entity2:RE_state{Name:line.Item2})
+CREATE (entity1)-[:re3_RELATION { type: line.relation }]->(entity2)
+
+
+
+//上下文关系边界和用例
+LOAD CSV  WITH HEADERS FROM "file:///content_relation.csv" AS line
+MATCH (entity1:RE_boundary{Name:line.Item1}) , (entity2:RE_usecase{Name:line.Item2})
+CREATE (entity1)-[:re3_RELATION { type: line.relation }]->(entity2)
+
+//上下文关系边界和对象
+LOAD CSV  WITH HEADERS FROM "file:///content_relation.csv" AS line
+MATCH (entity1:RE_boundary{Name:line.Item1}) , (entity2:RE_object{Name:line.Item2})
+CREATE (entity1)-[:re3_RELATION { type: line.relation }]->(entity2)
+
+//业务对象对应的属性
+LOAD CSV  WITH HEADERS FROM "file:///object_relation.csv" AS line
+MATCH (entity1:RE_object{Name:line.Item1}) , (entity2:RE_newNode{Title:line.Item2})
+CREATE (entity1)-[:re4_RELATION { type: line.relation }]->(entity2)
+
+//业务状态和业务用例
+LOAD CSV  WITH HEADERS FROM "file:///state_attribute.csv" AS line
+MATCH (entity1:RE_state{Name:line.Item1}) , (entity2:RE_newNode{Title:line.Item2})
+CREATE (entity1)-[:re5_RELATION { type: line.relation }]->(entity2)
+
+
+
